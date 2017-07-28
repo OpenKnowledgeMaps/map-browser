@@ -1,6 +1,6 @@
 ---
 title: "Cognitive Science"
-cover: "/maps/cognitive_science.png"
+cover: ""
 id: "fe385e803833403cbfade8569851ba9c"
 date: "01/02/2017"
 category: "another one"

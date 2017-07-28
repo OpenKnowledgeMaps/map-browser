@@ -31,7 +31,7 @@ class PostListing extends React.Component {
                   <h2>{post.title}</h2>
                 </Link>
                 <a href={`https://openknowledgemaps.org/vis.php?id=${post.id}`} target="_blank">
-                  <img src={post.cover} width="750" alt="map" />
+                  <img src={`/maps/${post.id}.png`} width="750" alt="map" />
                 </a>
                 <p>{post.description}</p>
                 <hr />
