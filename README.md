@@ -12,10 +12,13 @@ To deploy the gatsby dev-server which supports Hot Reloading:
 
 ```
 npm install
-gatsby develop
+npm run serve
 ```
 
-If you encounter any problems try to remove `.cache` and `node_modules` before running `npm install`. Also I couldn't get gatsby running with anything older than `node_v8.1.0`.
+You should be able to see the page on http://localhost:8000 
+
+
+If you encounter any problems try to remove `.cache` and `node_modules` before running `npm install`. Also I couldn't get gatsby running with anything older than `node_v8.1.0`. Check out [https://www.gatsbyjs.org/docs/gatsby-on-windows/](https://www.gatsbyjs.org/docs/gatsby-on-windows/) to run Gatsby on a Windows machine.
 
 ## Building/Production
 
