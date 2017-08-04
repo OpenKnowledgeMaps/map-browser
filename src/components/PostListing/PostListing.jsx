@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import _ from 'lodash';
+import Moment from 'react-moment';
 import './PostListing.css';
 
 class PostListing extends React.Component {
@@ -11,11 +12,13 @@ class PostListing extends React.Component {
         path: postEdge.node.fields.slug,
         tags: postEdge.node.frontmatter.tags,
         title: postEdge.node.frontmatter.title,
+        creator: postEdge.node.frontmatter.creator,
+        creatorURL: postEdge.node.frontmatter.creatorURL,
+        timestamp: postEdge.node.frontmatter.timestamp,
         id: postEdge.node.frontmatter.id,
         query: postEdge.node.frontmatter.query,
         service: postEdge.node.frontmatter.service,
         category: postEdge.node.frontmatter.category,
-        date: postEdge.node.frontmatter.date,
         description: postEdge.node.frontmatter.description,
         excerpt: postEdge.node.excerpt,
         timeToRead: postEdge.node.timeToRead,
@@ -36,6 +39,7 @@ class PostListing extends React.Component {
                   {post.title}
                 </Link>
               </h3>
+              <p>Posted: <Moment format="YYYY/MM/DD HH:mm">1976-04-19T12:59-0500</Moment> by <Link to={post.creatorURL} target="_blank">{post.creator}</Link></p>
 
               <a href={`/categories/${_.kebabCase(post.category)}`} className="button_green">
               cat:{post.category}

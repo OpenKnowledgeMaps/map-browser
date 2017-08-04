@@ -22,7 +22,7 @@ export const pageQuery = graphql`
   query TagPage($tag: String) {
     allMarkdownRemark(
       limit: 1000
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [frontmatter___timestamp], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }
     ) {
       totalCount
@@ -37,9 +37,11 @@ export const pageQuery = graphql`
             title
             tags
             id
+            creator
+            creatorURL
             query
             service
-            date
+            timestamp
             description
             category
           }

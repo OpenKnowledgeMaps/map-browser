@@ -24,7 +24,7 @@ export const pageQuery = graphql`
   query IndexQuery {
   allMarkdownRemark(
       limit: 2000,
-      sort: { fields: [frontmatter___date], order: DESC },
+      sort: { fields: [frontmatter___timestamp], order: DESC },
     ) {
       edges {
         node {
@@ -36,11 +36,13 @@ export const pageQuery = graphql`
           frontmatter {
             title
             tags
+            creator
+            creatorURL
             id
             query
             category
             service
-            date
+            timestamp
             description
           }
         }

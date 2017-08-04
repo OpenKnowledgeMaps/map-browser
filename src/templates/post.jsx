@@ -51,7 +51,7 @@ export const pageQuery = graphql`
       excerpt
       frontmatter {
         title
-        date
+        timestamp
         category
         tags
       }
