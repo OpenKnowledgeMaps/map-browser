@@ -39,7 +39,11 @@ class PostListing extends React.Component {
                   {post.title}
                 </Link>
               </h3>
-              <p>Posted: <Moment format="YYYY/MM/DD HH:mm">1976-04-19T12:59-0500</Moment> by <Link to={post.creatorURL} target="_blank">{post.creator}</Link></p>
+              <p>
+                Posted <Moment format="YYYY/MM/DD HH:mm">{post.timestamp}</Moment>
+                &nbsp;by&nbsp;
+                <Link to={post.creatorURL} target="_blank">{post.creator}</Link>
+              </p>
 
               <a href={`/categories/${_.kebabCase(post.category)}`} className="button_green">
               cat:{post.category}
