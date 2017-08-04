@@ -1,16 +1,17 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import get from 'lodash/get';
 import PostListing from '../components/PostListing/PostListing';
 import SEO from '../components/SEO/SEO';
-import config from '../../data/SiteConfig';
 
 class Index extends React.Component {
   render() {
-    const postEdges = this.props.data.allMarkdownRemark.edges;
+    const postEdges = get(this, 'props.data.allPostsJson.edges');
+    const siteMetadata = get(this, 'props.data.site.siteMetadata');
     return (
       <div className="index-container">
-        <Helmet title={config.siteTitle} />
-        <SEO postEdges={postEdges} />
+        <Helmet title={siteMetadata.siteTitle} />
+        <SEO postEdges={postEdges} config={siteMetadata} />
         <PostListing postEdges={postEdges} />
       </div>
     );
@@ -22,31 +23,30 @@ export default Index;
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query IndexQuery {
-  allMarkdownRemark(
-      limit: 2000,
-      sort: { fields: [frontmatter___timestamp], order: DESC },
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          excerpt
-          timeToRead
-          frontmatter {
-            title
-            tags
-            creator
-            creatorURL
-            id
-            query
-            category
-            service
-            timestamp
-            description
-          }
-        }
+    site {
+      siteMetadata {
+        siteTitle
+        siteUrl
+        pathPrefix
+        siteDescription
       }
     }
-}
+    allPostsJson(limit: 1000) {
+      edges {
+        node {
+            title 
+            tags 
+            creator 
+            creatorURL 
+            id 
+            query 
+            category 
+            service 
+            timestamp 
+            description 
+            slug
+          }
+       }
+    }
+  }
 `;

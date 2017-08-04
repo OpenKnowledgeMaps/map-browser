@@ -9,19 +9,17 @@ class PostListing extends React.Component {
     const postList = [];
     this.props.postEdges.forEach((postEdge) => {
       postList.push({
-        path: postEdge.node.fields.slug,
-        tags: postEdge.node.frontmatter.tags,
-        title: postEdge.node.frontmatter.title,
-        creator: postEdge.node.frontmatter.creator,
-        creatorURL: postEdge.node.frontmatter.creatorURL,
-        timestamp: postEdge.node.frontmatter.timestamp,
-        id: postEdge.node.frontmatter.id,
-        query: postEdge.node.frontmatter.query,
-        service: postEdge.node.frontmatter.service,
-        category: postEdge.node.frontmatter.category,
-        description: postEdge.node.frontmatter.description,
-        excerpt: postEdge.node.excerpt,
-        timeToRead: postEdge.node.timeToRead,
+        path: postEdge.node.slug,
+        tags: postEdge.node.tags,
+        title: postEdge.node.title,
+        creator: postEdge.node.creator,
+        creatorURL: postEdge.node.creatorURL,
+        timestamp: postEdge.node.timestamp,
+        id: postEdge.node.id,
+        query: postEdge.node.query,
+        service: postEdge.node.service,
+        category: postEdge.node.category,
+        description: postEdge.node.description,
       });
     });
     return postList;
@@ -50,7 +48,7 @@ class PostListing extends React.Component {
               </a>
 
               {post.tags.map(tag =>
-                <a href={`/tags/${_.kebabCase(tag)}`} className="button">{tag}</a>,
+                <a key={`${post.id}+${tag}`} href={`/tags/${_.kebabCase(tag)}`} className="button">{tag}</a>,
               )}
 
               <p>{post.description}</p>

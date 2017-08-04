@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import config from '../../../data/SiteConfig';
 
 class SEO extends Component {
   render() {
-    const { postNode, postPath, postSEO } = this.props;
+    const { config, postNode, postPath, postSEO } = this.props;
     let title;
     let description;
     let image;

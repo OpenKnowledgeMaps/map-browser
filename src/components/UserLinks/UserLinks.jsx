@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './UserLinks.css';
 
 class UserLinks extends Component {
-  getLinkElements() {
-    const { userLinks } = this.props.config;
-    const { labeled } = this.props;
+  getLinkElements(userLinks, labeled) {
     return userLinks.map(link =>
       (
         <div key={link.label}>
@@ -18,14 +16,14 @@ class UserLinks extends Component {
   }
 
   render() {
-    const { userLinks } = this.props.config;
+    const { userLinks, labeled } = this.props;
     if (!userLinks) {
       return null;
     }
     return (
       <div className="user-links">
         {
-          this.getLinkElements()
+          this.getLinkElements(userLinks, labeled)
         }
       </div>
     );

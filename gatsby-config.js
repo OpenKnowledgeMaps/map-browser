@@ -1,22 +1,59 @@
-const config = require('./data/SiteConfig');
+const path = require('path');
 
-const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
+const metadata = {
+  siteTitle: 'OKM Browser', // Site title.
+  siteTitleAlt: 'Open Knowledge Maps Browser', // Alternative site title for SEO.
+  siteLogo: '', // Logo used for SEO and manifest.
+  siteUrl: 'https://openknowledgemaps.org', // Domain of your website without pathPrefix.
+  pathPrefix: '/browser', // Prefixes all links. For cases when deployed to example.github.io/gatsby-advanced-starter/.
+  siteDescription: 'The Open Knowledge Maps Browser', // Website description used for RSS feeds/meta description tag.
+  siteRss: '/rss.xml', // Path to the RSS file.
+  siteFBAppID: '1825356251115265', // FB Application ID for using app insights
+  googleAnalyticsID: '', // GA tracking ID.
+  disqusShortname: '', // Disqus shortname.
+  postDefaultCategoryID: '', // Default category for posts.
+  userName: '', // Username to display in the author segment.
+  userTwitter: 'https://twitter.com/ok_maps', // Optionally renders "Follow Me" in the UserInfo segment.
+  userLocation: '', // User location to display in the author segment.
+  userAvatar: '', // User avatar to display in the author segment.
+  userDescription: '', // User description to display in the author segment.
+  // Links to social profiles/projects you want to display in the author segment/navigation bar.
+  copyright: 'Copyright © 2017. Open Knowledge Maps', // Copyright string for the footer of the website and RSS feed.
+};
 
 module.exports = {
-  pathPrefix: config.pathPrefix,
   siteMetadata: {
-    siteUrl: config.siteUrl + pathPrefix,
+    siteTitle: metadata.siteTitle, // Site title.
+    siteTitleAlt: metadata.siteTitleAlt, // Alternative site title for SEO.
+    siteLogo: metadata.siteLogo, // Logo used for SEO and manifest.
+    siteUrl: metadata.siteUrl, // Domain of your website without pathPrefix.
+    pathPrefix: metadata.pathPrefix,
+    siteDescription: metadata.siteDescription,
+    siteRss: metadata.siteRss, // Path to the RSS file.
+    siteFBAppID: metadata.siteFBAppID, // FB Application ID for using app insights
+    googleAnalyticsID: metadata.googleAnalyticsID, // GA tracking ID.
+    disqusShortname: metadata.disqusShortname, // Disqus shortname.
+    postDefaultCategoryID: metadata.postDefaultCategoryID, // Default category for posts.
+    userName: metadata.userName, // Username to display in the author segment.
+    userTwitter: metadata.userTwitter, // Optionally renders "Follow Me" in the UserInfo segment.
+    userLocation: metadata.userLocation, // User location to display in the author segment.
+    userAvatar: metadata.userAvatar, // User avatar to display in the author segment.
+    userDescription: metadata.userDescription, // User description to display in the author segment.
+    // Links to social profiles/projects you want to display in the author segment/navigation bar.
+    userLinks: metadata.userLinks,
+    copyright: metadata.copyright, // Copyright string for the footer of the website and RSS feed.
     rssMetadata: {
-      site_url: config.siteUrl + pathPrefix,
-      feed_url: config.siteUrl + pathPrefix + config.siteRss,
-      title: config.siteTitle,
-      description: config.siteDescription,
-      image_url: `${config.siteUrl + pathPrefix}/logos/logo-512.png`,
-      author: config.userName,
-      copyright: config.copyright,
+      site_url: metadata.siteUrl + metadata.pathPrefix,
+      feed_url: metadata.siteUrl + metadata + metadata.siteRss,
+      title: metadata.siteTitle,
+      description: metadata.siteDescription,
+      image_url: `${metadata.siteUrl + metadata}/logos/logo-512.png`,
+      author: metadata.userName,
+      copyright: metadata.copyright,
     },
   },
   plugins: [
+    'gatsby-transformer-json',
     {
       resolve: 'gatsby-plugin-typography',
       options: {
@@ -27,8 +64,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'posts',
-        path: `${__dirname}/content/${config.blogPostDir}`,
+        name: 'data',
+        path: path.join(__dirname, 'data'),
       },
     },
     {
@@ -53,7 +90,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
-        trackingId: config.googleAnalyticsID,
+        trackingId: metadata.googleAnalyticsID,
       },
     },
     {
@@ -69,10 +106,10 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: config.siteTitle,
-        short_name: config.siteTitle,
-        description: config.siteDescription,
-        start_url: config.pathPrefix,
+        name: metadata.siteTitle,
+        short_name: metadata.siteTitle,
+        description: metadata.siteDescription,
+        start_url: metadata.pathPrefix,
         background_color: '#e0e0e0',
         theme_color: '#c62828',
         display: 'minimal-ui',
@@ -155,7 +192,7 @@ module.exports = {
               }
             }
           `,
-            output: config.siteRss,
+            output: metadata.siteRss,
           },
         ],
       },

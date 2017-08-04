@@ -1,16 +1,17 @@
 import React from 'react';
+import get from 'lodash/get';
 import Helmet from 'react-helmet';
 import PostListing from '../components/PostListing/PostListing';
-import config from '../../data/SiteConfig';
 
 export default class CategoryTemplate extends React.Component {
   render() {
-    const category = this.props.pathContext.category;
-    const postEdges = this.props.data.allMarkdownRemark.edges;
+    const category = get(this, 'props.pathContext.category');
+    const siteMetadata = get(this, 'props.data.site.siteMetadata');
+    const postEdges = get(this, 'props.data.allPostsJson.edges');
     return (
       <div className="category-container">
         <Helmet
-          title={`Posts in category "${category}" | ${config.siteTitle}`}
+          title={`Posts in category "${category}" | ${siteMetadata.siteTitle}`}
         />
         <h2>We found {postEdges.length} {postEdges.length === 1 ? 'map' : 'maps'}  for cat:{category}</h2>
         <PostListing postEdges={postEdges} />
@@ -22,33 +23,33 @@ export default class CategoryTemplate extends React.Component {
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
   query CategoryPage($category: String) {
-    allMarkdownRemark(
-      limit: 1000
-      sort: { fields: [frontmatter___timestamp], order: DESC }
-      filter: { frontmatter: { category: { eq: $category } } }
-    ) {
-      totalCount
-      edges {
-        node {
-          fields {
-            slug
-          }
-          excerpt
-          timeToRead
-          frontmatter {
-            title
-            tags
-            id
-            creator
-            creatorURL
-            query
-            service
-            timestamp
-            description
-            category
-          }
-        }
+    site {
+      siteMetadata {
+        siteTitle
+        siteUrl
+        pathPrefix
+        siteDescription
       }
     }
-  }
-`;
+    allPostsJson(
+      limit: 1000
+      sort: { fields: [timestamp], order: DESC } 
+      filter: { category: { eq: $category } } 
+    ) {
+      edges {
+        node {
+            title 
+            tags 
+            creator 
+            creatorURL 
+            id 
+            query 
+            category 
+            service 
+            timestamp 
+            description 
+            slug
+          }
+       }
+    }
+  }`;

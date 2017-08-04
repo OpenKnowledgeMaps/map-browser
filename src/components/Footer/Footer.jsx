@@ -2,23 +2,33 @@ import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import UserLinks from '../UserLinks/UserLinks';
 import './Footer.css';
-import config from '../../../data/SiteConfig';
+
+const userLinks = [
+  {
+    label: 'GitHub',
+    url: 'https://github.com/OpenKnowledgeMaps',
+    iconClassName: 'fa fa-github',
+  },
+  {
+    label: 'Twitter',
+    url: 'https://twitter.com/ok_maps',
+    iconClassName: 'fa fa-twitter',
+  },
+  {
+    label: 'Email',
+    url: 'mailto:info@openknowledgemaps.org',
+    iconClassName: 'fa fa-envelope',
+  }];
 
 class Footer extends Component {
   render() {
-    const { siteRSS, copyright } = config;
-    if (!copyright) {
-      return null;
-    }
     return (
       <footer className="footer">
-        <UserLinks config={config} labeled />
+        <UserLinks userLinks={userLinks} labeled />
         <div className="notice-container">
-          <h4>
-            {copyright}
-          </h4>
+          <h4>Copyright © 2017. Open Knowledge Maps</h4>
 
-          <Link to={siteRSS}>
+          <Link to="">
             <button>Subscribe</button>
           </Link>
           <h4>
