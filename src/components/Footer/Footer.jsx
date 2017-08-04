@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import Link from "gatsby-link";
-import UserLinks from "../UserLinks/UserLinks";
-import UserInfo from "../UserInfo/UserInfo";
-import "./Footer.css";
-import config from "../../../data/SiteConfig";
+import React, { Component } from 'react';
+import Link from 'gatsby-link';
+import UserLinks from '../UserLinks/UserLinks';
+import './Footer.css';
+import config from '../../../data/SiteConfig';
 
 class Footer extends Component {
   render() {
@@ -23,7 +22,7 @@ class Footer extends Component {
             <button>Subscribe</button>
           </Link>
           <h4>
-            Based on{" "}
+            Based on{' '}
             <a href="https://github.com/Vagr9K/gatsby-advanced-starter">
               Gatsby Advanced Starter
             </a>.

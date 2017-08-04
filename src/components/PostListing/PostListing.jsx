@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import _ from "lodash";
-import "./PostListing.css"
+import _ from 'lodash';
+import './PostListing.css';
 
 class PostListing extends React.Component {
   getPostList() {
@@ -29,34 +29,34 @@ class PostListing extends React.Component {
       <div>
         {
         /* Your post list here. */
-        postList.map(post => (
-          <div key={post.id}>
-            <h3>
-              <Link to={`https://openknowledgemaps.org/vis.php?id=${post.id}&query=${post.query}&service=${post.service}`} target="_blank">
-                {post.title}
-              </Link>
-            </h3>
+          postList.map(post => (
+            <div key={post.id}>
+              <h3>
+                <Link to={`https://openknowledgemaps.org/vis.php?id=${post.id}&query=${post.query}&service=${post.service}`} target="_blank">
+                  {post.title}
+                </Link>
+              </h3>
 
-            <a href={`/categories/${_.kebabCase(post.category)}`} className="button_green">
+              <a href={`/categories/${_.kebabCase(post.category)}`} className="button_green">
               cat:{post.category}
-            </a>
+              </a>
 
-            {post.tags.map(tag =>
-              <a href={`/tags/${_.kebabCase(tag)}`} className="button">{tag}</a>
-                )}
-            
-            <p>{post.description}</p>
+              {post.tags.map(tag =>
+                <a href={`/tags/${_.kebabCase(tag)}`} className="button">{tag}</a>,
+              )}
 
-            <a href={`https://openknowledgemaps.org/vis.php?id=${post.id}&query=${post.query}&service=${post.service}`} target="_blank">
-              <img src={`/maps/${post.id}.png`} width="750" alt="map" />
-            </a>
+              <p>{post.description}</p>
 
-            <hr />
-          </div>
+              <a href={`https://openknowledgemaps.org/vis.php?id=${post.id}&query=${post.query}&service=${post.service}`} target="_blank">
+                <img src={`/maps/${post.id}.png`} width="750" alt="map" />
+              </a>
+
+              <hr />
+            </div>
           ))
-      }
+        }
       </div>
-      );
+    );
   }
 }
 
