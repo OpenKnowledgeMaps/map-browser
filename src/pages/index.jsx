@@ -11,9 +11,6 @@ class Index extends React.Component {
       <div className="index-container">
         <Helmet title={config.siteTitle} />
         <SEO postEdges={postEdges} />
-
-        <h1>The Open Knowledge Maps Browser</h1>
-        <p>It is a really great browser. Look at all these great maps. Pls upvote.</p>
         <PostListing postEdges={postEdges} />
       </div>
     );
@@ -39,10 +36,12 @@ export const pageQuery = graphql`
           frontmatter {
             title
             tags
-            cover
+            id
+            query
+            category
+            service
             date
             description
-            id
           }
         }
       }

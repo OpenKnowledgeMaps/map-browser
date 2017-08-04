@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import Link from 'gatsby-link';
-import UserLinks from '../UserLinks/UserLinks';
-import config from '../../../data/SiteConfig';
-import './Footer.css';
+import React, { Component } from "react";
+import Link from "gatsby-link";
+import UserLinks from "../UserLinks/UserLinks";
+import UserInfo from "../UserInfo/UserInfo";
+import "./Footer.css";
+import config from "../../../data/SiteConfig";
 
 class Footer extends Component {
   render() {
-    const url = config.siteRss;
-    const { copyright } = this.props.config;
+    const { siteRSS, copyright } = config;
     if (!copyright) {
       return null;
     }
@@ -15,13 +15,18 @@ class Footer extends Component {
       <footer className="footer">
         <UserLinks config={config} labeled />
         <div className="notice-container">
-          <h4>{copyright}</h4>
+          <h4>
+            {copyright}
+          </h4>
 
-          <Link to={url}>
+          <Link to={siteRSS}>
             <button>Subscribe</button>
           </Link>
           <h4>
-            Based on <a href="https://github.com/Vagr9K/gatsby-advanced-starter">Gatsby Advanced Starter</a>.
+            Based on{" "}
+            <a href="https://github.com/Vagr9K/gatsby-advanced-starter">
+              Gatsby Advanced Starter
+            </a>.
           </h4>
         </div>
       </footer>

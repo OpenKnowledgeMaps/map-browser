@@ -12,7 +12,7 @@ module.exports = {
   disqusShortname: '', // Disqus shortname.
   postDefaultCategoryID: '', // Default category for posts.
   userName: '', // Username to display in the author segment.
-  userTwitter: '', // Optionally renders "Follow Me" in the UserInfo segment.
+  userTwitter: 'https://twitter.com/ok_maps', // Optionally renders "Follow Me" in the UserInfo segment.
   userLocation: '', // User location to display in the author segment.
   userAvatar: '', // User avatar to display in the author segment.
   userDescription: "", // User description to display in the author segment.
