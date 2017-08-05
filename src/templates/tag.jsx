@@ -32,7 +32,7 @@ export const pageQuery = graphql`
     allPostsJson(
       limit: 1000
       sort: { fields: [timestamp], order: DESC } 
-      filter: { tag: { eq: $tag } } 
+      filter: { tags: { in: [$tag] } } 
     ) {
       edges {
         node {
