@@ -1,0 +1,53 @@
+[
+	{
+		"title": "Andrew Feenberg",
+		"cover": "maps/fb2dda826f8e92765c115677514ee522.png",
+		"creator": "Asura Enkhbayar",
+		"creatorURL": "https://twitter.com/AsuraEnkhbayar",
+		"id": "fb2dda826f8e92765c115677514ee522",
+		"query": "andrew feenberg",
+		"service": "base",
+		"timestamp": "2017-08-04T12:59-0500",
+		"category": "Researcher",
+		"description": "A knowledge map of publications related to Andrew Feenberg",
+		"tags":[
+			"philosophy",
+			"technology",
+			"critical theory"
+		]
+	},
+	{
+		"title": "Cognitive Science",
+		"cover": "maps/b14d3c429e28b09a932d34040cac1247.png",
+		"timestamp": "2017-08-04T13:15-0000",
+		"creator": "Peter Kraker",
+		"creatorURL": "https://twitter.com/PeterKraker",
+		"id": "b14d3c429e28b09a932d34040cac1247",
+		"query": "cognitive science",
+		"service": "pubmed",
+		"category": "Scientific Discipline",
+		"description": "This is a knowledge map that gives an overview about Cognitive Science in biomedicine.",
+		"tags":[
+			"neuroscience",
+			"consciousness",
+			"cognitive science"
+		]
+	},
+	{
+		"title": "Philosophy of Mind",
+		"cover": "maps/b7c5228785c76cd363db6590942a347c.png",
+		"creator": "Christopher Kittel",
+		"creatorURL": "https://twitter.com/chris_kittel",
+		"timestamp": "2017-08-03T20:10-2300",
+		"id": "b7c5228785c76cd363db6590942a347c",
+		"query": "philosophy of mind",
+		"service": "pubmed",
+		"category": "Scientific Discipline",
+		"description": "This is a knowledge map that gives an overview about Philosophy of Mind in biomedicine.",
+		"tags":[
+			"philosophy",
+			"consciousness",
+			"cognitive science"
+		]
+	}
+]
