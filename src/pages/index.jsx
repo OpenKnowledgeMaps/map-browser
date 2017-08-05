@@ -38,13 +38,23 @@ export const pageQuery = graphql`
             tags 
             creator 
             creatorURL 
+            bigImage: cover {
+              childImageSharp {
+                big: responsiveSizes(maxWidth: 700) {
+                  src
+                  srcSet
+                }
+              }
+            }
             id 
             query 
             category 
             service 
             timestamp 
             description 
-            slug
+            fields {
+              slug
+            }
           }
        }
     }

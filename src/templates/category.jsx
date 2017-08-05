@@ -38,18 +38,28 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
-            title 
-            tags 
-            creator 
-            creatorURL 
-            id 
-            query 
-            category 
-            service 
-            timestamp 
-            description 
+          title 
+          tags 
+          creator 
+          creatorURL 
+          bigImage: cover {
+            childImageSharp {
+              big: responsiveSizes(maxWidth: 700) {
+                src
+                srcSet
+              }
+            }
+          }
+          id 
+          query 
+          category 
+          service 
+          timestamp 
+          description 
+          fields {
             slug
           }
-       }
-    }
-  }`;
+        }
+     }
+  }
+}`;

@@ -4,15 +4,16 @@ import UserInfo from '../components/UserInfo/UserInfo';
 import Disqus from '../components/Disqus/Disqus';
 import PostTags from '../components/PostTags/PostTags';
 import SocialLinks from '../components/SocialLinks/SocialLinks';
+import PostDetail from '../components/PostDetail/PostDetail';
 import SEO from '../components/SEO/SEO';
 import './post.css';
 
 export default class PostTemplate extends React.Component {
   render() {
     const { slug } = this.props.pathContext;
-    const postNode = this.props.data.post;
-    const { config } = this.props.data.siteMetadata;
-    const post = postNode.frontmatter;
+    const postNode = this.props.data.postsJson;
+    const config = this.props.data.siteMetadata;
+    const post = postNode;
     if (!post.id) {
       post.id = this.props.location.pathname;
     }
@@ -21,21 +22,22 @@ export default class PostTemplate extends React.Component {
     }
     return (
       <div>
+        {/*
         <Helmet>
           <title>{`${post.title} | ${config.siteTitle}`}</title>
         </Helmet>
         <SEO postPath={slug} postNode={postNode} postSEO />
+        */}
         <div>
-          <h1>
-            {post.title}
-          </h1>
-          <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
+          <PostDetail post={post} />
+          {/*
           <div className="post-meta">
             <PostTags tags={post.tags} />
             <SocialLinks postPath={slug} postNode={postNode} />
           </div>
           <UserInfo config={config} />
           <Disqus post={post} />
+          */}
         </div>
       </div>
     );
@@ -44,7 +46,7 @@ export default class PostTemplate extends React.Component {
 
 /* eslint no-undef: "off" */
 export const pageQuery = graphql`
-  query PostQuery {
+  query PostBySlug($slug: String!) {
     site {
       siteMetadata {
         siteTitle
@@ -53,21 +55,27 @@ export const pageQuery = graphql`
         siteDescription
       }
     }
-    allPostsJson(limit: 1000) {
-      edges {
-        node {
-            title 
-            tags 
-            creator 
-            creatorURL 
-            id 
-            query 
-            category 
-            service 
-            timestamp 
-            slug
-            description 
+    postsJson(fields: { slug: { eq: $slug }}) {
+      title 
+      tags 
+      creator 
+      creatorURL 
+      bigImage: cover {
+        childImageSharp {
+          big: responsiveSizes(maxWidth: 700) {
+            src
+            srcSet
           }
-       }
+        }
+      }
+      id 
+      query 
+      category 
+      service 
+      timestamp 
+      description 
+      fields {
+        slug
+      }
     }
   }`;

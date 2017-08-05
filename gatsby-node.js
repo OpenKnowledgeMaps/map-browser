@@ -2,34 +2,16 @@ const path = require('path');
 const _ = require('lodash');
 const webpackLodashPlugin = require('lodash-webpack-plugin');
 
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
+exports.onCreateNode = ({ node, boundActionCreators }) => {
   const { createNodeField } = boundActionCreators;
-  let slug;
-  if (node.internal.type === 'MarkdownRemark') {
-    const fileNode = getNode(node.parent);
-    const parsedFilePath = path.parse(fileNode.relativePath);
-    if (
-      Object.prototype.hasOwnProperty.call(node, 'post') &&
-      Object.prototype.hasOwnProperty.call(node.post, 'slug')
-    ) {
-      slug = `/${_.kebabCase(node.post.slug)}`;
-    }
-    if (
-      Object.prototype.hasOwnProperty.call(node, 'post') &&
-      Object.prototype.hasOwnProperty.call(node.post, 'title')
-    ) {
-      slug = `/${_.kebabCase(node.post.title)}`;
-    } else if (parsedFilePath.name !== 'index' && parsedFilePath.dir !== '') {
-      slug = `/${parsedFilePath.dir}/${parsedFilePath.name}/`;
-    } else if (parsedFilePath.dir === '') {
-      slug = `/${parsedFilePath.name}/`;
-    } else {
-      slug = `/${parsedFilePath.dir}/`;
-    }
-    createNodeField({ node, name: 'slug', value: slug });
+  if (node.internal.type === 'PostsJson') {
+    createNodeField({
+      node,
+      name: 'slug',
+      value: `/${_.kebabCase(node.title)}`,
+    });
   }
 };
-
 
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
@@ -46,39 +28,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           allPostsJson(limit: 1000) {
             edges {
               node {
-                title 
                 tags 
-                creator 
-                creatorURL 
-                id 
-                query 
                 category 
-                service 
-                timestamp 
-                description 
-                slug
+                fields {
+                  slug
+                }
               }
-            }
-          }
-          site {
-            siteMetadata {
-              siteTitle
-              siteTitleAlt
-              siteLogo
-              siteUrl
-              pathPrefix
-              siteDescription
-              siteRss
-              siteFBAppID
-              googleAnalyticsID
-              disqusShortname
-              postDefaultCategoryID
-              userName
-              userTwitter
-              userLocation
-              userAvatar
-              userDescription
-              copyright
             }
           }
         }
@@ -104,10 +59,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           }
 
           createPage({
-            path: edge.node.slug,
+            path: edge.node.fields.slug,
             component: postPage,
             context: {
-              slug: edge.node.slug,
+              slug: edge.node.fields.slug,
             },
           });
         });
